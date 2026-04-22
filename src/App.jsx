@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 
 // Import all components
-import Dashboard from './components/Dashboard/dashboard.jsx';
+import Dashboard from './components/Dashboard/dashboard';
 import Services from './components/Services/services';
 import HowItWorks from './components/Howitworks/howitworks';
 import Developers from './components/Developers/developers';

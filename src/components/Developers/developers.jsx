@@ -3,8 +3,7 @@ import './developers.css';
 import Header from '../Header/header';
 import Footer from '../Footer/footer';
 
-
-export default function DevelopersPage() {
+export default function DevelopersPage({ setCurrentPage }) {
   const [selectedDeveloper, setSelectedDeveloper] = useState(null);
   const [filters, setFilters] = useState({
     specialty: 'all',
@@ -14,23 +13,24 @@ export default function DevelopersPage() {
 
   return (
     <div className="developers-page">
-      <Header />
-      <DevelopersHero />
+      <Header setCurrentPage={setCurrentPage} />
+      <DevelopersHero setCurrentPage={setCurrentPage} />
       <FilterSection filters={filters} setFilters={setFilters} />
       <DeveloperGrid 
         filters={filters} 
         selectedDeveloper={selectedDeveloper}
         setSelectedDeveloper={setSelectedDeveloper}
+        setCurrentPage={setCurrentPage}
       />
       <WhyOurDevelopers />
-      <BecomeADeveloper />
-      <CTASection />
-      <Footer />
+      <BecomeADeveloper setCurrentPage={setCurrentPage} />
+      <CTASection setCurrentPage={setCurrentPage} />
+      <Footer setCurrentPage={setCurrentPage} />
     </div>
   );
 }
 
-function DevelopersHero() {
+function DevelopersHero({ setCurrentPage }) {
   return (
     <section className="dev-hero">
       <div className="container">
@@ -49,6 +49,16 @@ function DevelopersHero() {
             <span className="stat-number">4.9★</span>
             <span className="stat-label">Average Rating</span>
           </div>
+        </div>
+        
+        {/* BOUTON HERO */}
+        <div style={{textAlign: 'center', marginTop: '30px'}}>
+          <button 
+            className="cta-button"
+            onClick={() => setCurrentPage('get-matched')}
+          >
+            Get Matched with a Developer
+          </button>
         </div>
       </div>
     </section>
@@ -112,7 +122,7 @@ function FilterSection({ filters, setFilters }) {
   );
 }
 
-function DeveloperGrid({ filters, selectedDeveloper, setSelectedDeveloper }) {
+function DeveloperGrid({ filters, selectedDeveloper, setSelectedDeveloper, setCurrentPage }) {
   const developers = [
     {
       id: 1,
@@ -217,110 +227,6 @@ function DeveloperGrid({ filters, selectedDeveloper, setSelectedDeveloper }) {
         { author: "Mike D.", text: "Emma is a React wizard. Our app is fast, beautiful, and maintainable. Highly recommend!", rating: 5 },
         { author: "Sarah P.", text: "Professional, knowledgeable, and great to work with. Exceeded all expectations.", rating: 5 }
       ]
-    },
-    {
-      id: 5,
-      name: "James Wilson",
-      avatar: "👨‍💻",
-      title: "Backend Architect",
-      specialty: "backend",
-      experience: "12 years",
-      experienceYears: 12,
-      rating: 5.0,
-      projects: 71,
-      hourlyRate: "$95/hr",
-      availability: "available",
-      location: "Boston, MA",
-      bio: "Backend specialist focused on building robust, scalable APIs and database architectures. Security and performance are my top priorities.",
-      skills: ["Node.js", "Python", "PostgreSQL", "Redis", "Docker", "Microservices"],
-      languages: ["English"],
-      portfolio: [
-        "API for mobile app with 100k+ users",
-        "Payment processing system",
-        "Real-time messaging backend"
-      ],
-      reviews: [
-        { author: "Anna L.", text: "James built a rock-solid backend for our app. Zero downtime in 8 months of operation.", rating: 5 },
-        { author: "Chris M.", text: "Excellent technical skills and great communicator. Highly professional.", rating: 5 }
-      ]
-    },
-    {
-      id: 6,
-      name: "Maria Garcia",
-      avatar: "👩‍💻",
-      title: "WordPress & PHP Expert",
-      specialty: "fullstack",
-      experience: "7 years",
-      experienceYears: 7,
-      rating: 4.9,
-      projects: 45,
-      hourlyRate: "$70/hr",
-      availability: "available",
-      location: "Miami, FL",
-      bio: "WordPress specialist who builds custom themes and plugins. I help businesses create powerful, easy-to-manage websites.",
-      skills: ["WordPress", "PHP", "MySQL", "JavaScript", "WooCommerce", "Elementor"],
-      languages: ["English", "Spanish", "Portuguese"],
-      portfolio: [
-        "Custom WordPress theme for magazine",
-        "Membership site with payment integration",
-        "Multi-site WordPress network"
-      ],
-      reviews: [
-        { author: "Robert F.", text: "Maria transformed our outdated site into a modern, fast WordPress site. Very happy!", rating: 5 },
-        { author: "Diana S.", text: "Great work on our custom plugin. Exactly what we needed.", rating: 5 }
-      ]
-    },
-    {
-      id: 7,
-      name: "Kevin Park",
-      avatar: "👨‍💻",
-      title: "Mobile & Web Developer",
-      specialty: "mobile",
-      experience: "6 years",
-      experienceYears: 6,
-      rating: 4.8,
-      projects: 33,
-      hourlyRate: "$80/hr",
-      availability: "soon",
-      location: "Los Angeles, CA",
-      bio: "Cross-platform developer specializing in React Native and responsive web apps. I build apps that work seamlessly across all devices.",
-      skills: ["React Native", "React", "TypeScript", "Firebase", "iOS", "Android"],
-      languages: ["English", "Korean"],
-      portfolio: [
-        "Fitness tracking mobile app",
-        "Food delivery platform",
-        "Event management app"
-      ],
-      reviews: [
-        { author: "Amy T.", text: "Kevin built our mobile app and it works perfectly on both iOS and Android. Great developer!", rating: 5 },
-        { author: "Paul W.", text: "Responsive and skilled. Would hire again.", rating: 5 }
-      ]
-    },
-    {
-      id: 8,
-      name: "Linda Brown",
-      avatar: "👩‍💻",
-      title: "Frontend Engineer",
-      specialty: "frontend",
-      experience: "5 years",
-      experienceYears: 5,
-      rating: 4.9,
-      projects: 29,
-      hourlyRate: "$75/hr",
-      availability: "available",
-      location: "Denver, CO",
-      bio: "Frontend developer who loves creating pixel-perfect, interactive user interfaces. Specializing in modern JavaScript frameworks and CSS.",
-      skills: ["Vue.js", "React", "Tailwind CSS", "JavaScript", "Sass", "Webpack"],
-      languages: ["English"],
-      portfolio: [
-        "Interactive product showcase",
-        "Admin dashboard with charts",
-        "Marketing website with animations"
-      ],
-      reviews: [
-        { author: "Steve K.", text: "Linda's attention to detail is amazing. Our website looks and works beautifully.", rating: 5 },
-        { author: "Karen J.", text: "Professional and talented. Delivered on time and on budget.", rating: 5 }
-      ]
     }
   ];
 
@@ -386,13 +292,21 @@ function DeveloperGrid({ filters, selectedDeveloper, setSelectedDeveloper }) {
               </div>
 
               <div className="dev-card-footer">
+                {/* BOUTON: Ouvre le modal */}
                 <button 
                   className="view-profile-btn"
                   onClick={() => setSelectedDeveloper(dev.id)}
                 >
                   View Full Profile
                 </button>
-                <button className="contact-btn">Contact Developer</button>
+                
+                {/* BOUTON: Va vers Get Matched */}
+                <button 
+                  className="contact-btn"
+                  onClick={() => setCurrentPage('get-matched')}
+                >
+                  Contact Developer
+                </button>
               </div>
             </div>
           ))}
@@ -402,6 +316,7 @@ function DeveloperGrid({ filters, selectedDeveloper, setSelectedDeveloper }) {
           <DeveloperModal 
             developer={developers.find(d => d.id === selectedDeveloper)}
             onClose={() => setSelectedDeveloper(null)}
+            setCurrentPage={setCurrentPage}
           />
         )}
       </div>
@@ -409,7 +324,7 @@ function DeveloperGrid({ filters, selectedDeveloper, setSelectedDeveloper }) {
   );
 }
 
-function DeveloperModal({ developer, onClose }) {
+function DeveloperModal({ developer, onClose, setCurrentPage }) {
   if (!developer) return null;
 
   return (
@@ -478,7 +393,16 @@ function DeveloperModal({ developer, onClose }) {
         </div>
 
         <div className="modal-footer">
-          <button className="contact-btn-large">Contact {developer.name}</button>
+          {/* BOUTON MODAL: Va vers Get Matched */}
+          <button 
+            className="contact-btn-large"
+            onClick={() => {
+              onClose();
+              setCurrentPage('get-matched');
+            }}
+          >
+            Contact {developer.name}
+          </button>
         </div>
       </div>
     </div>
@@ -517,7 +441,7 @@ function WhyOurDevelopers() {
   );
 }
 
-function BecomeADeveloper() {
+function BecomeADeveloper({ setCurrentPage }) {
   return (
     <section className="become-developer">
       <div className="container">
@@ -533,7 +457,13 @@ function BecomeADeveloper() {
             </ul>
           </div>
           <div className="become-cta">
-            <button className="apply-btn">Apply to Join</button>
+            {/* BOUTON: Peut aller vers Get Matched ou une page dédiée */}
+            <button 
+              className="apply-btn"
+              onClick={() => setCurrentPage('get-matched')}
+            >
+              Apply to Join
+            </button>
           </div>
         </div>
       </div>
@@ -541,15 +471,21 @@ function BecomeADeveloper() {
   );
 }
 
-function CTASection() {
+function CTASection({ setCurrentPage }) {
   return (
     <section className="dev-cta">
       <div className="container">
         <h2>Find Your Perfect Developer Match</h2>
         <p>Tell us about your project and we'll connect you with the ideal developer</p>
-        <button className="cta-button">Get Matched Now</button>
+        
+        {/* BOUTON FINAL */}
+        <button 
+          className="cta-button"
+          onClick={() => setCurrentPage('get-matched')}
+        >
+          Get Matched Now
+        </button>
       </div>
     </section>
   );
 }
-

@@ -3,13 +3,13 @@ import './pricing.css';
 import Header from '../Header/header';
 import Footer from '../Footer/footer';
 
-export default function PricingPage() {
+export default function PricingPage({ setCurrentPage }) {
   const [billingCycle, setBillingCycle] = useState('project'); // project or hourly
   const [selectedPackage, setSelectedPackage] = useState(null);
 
   return (
     <div className="pricing-page">
-      <Header />
+      <Header setCurrentPage={setCurrentPage} />
       <PricingHero />
       <BillingToggle billingCycle={billingCycle} setBillingCycle={setBillingCycle} />
       <PricingPackages billingCycle={billingCycle} selectedPackage={selectedPackage} setSelectedPackage={setSelectedPackage} />

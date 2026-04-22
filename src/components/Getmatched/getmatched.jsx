@@ -3,7 +3,7 @@ import './getmatched.css';
 import Header from '../Header/header';
 import Footer from '../Footer/footer';
 
-export default function GetMatchedPage() {
+export default function GetMatchedPage({ setCurrentPage }) {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     projectType: '',
@@ -61,11 +61,13 @@ export default function GetMatchedPage() {
   const handleSubmit = () => {
     console.log('Form submitted:', formData);
     alert('Thank you! We will match you with the perfect developer within 24 hours.');
+    // Retour au dashboard après soumission
+    setCurrentPage('dashboard');
   };
 
   return (
     <div className="get-matched-page">
-      <Header />
+      <Header setCurrentPage={setCurrentPage} />
       <FormHero currentStep={currentStep} totalSteps={totalSteps} />
       <FormContainer
         currentStep={currentStep}
@@ -78,12 +80,10 @@ export default function GetMatchedPage() {
         totalSteps={totalSteps}
       />
       <FormBenefits />
-      <Footer />
+      <Footer setCurrentPage={setCurrentPage} />
     </div>
   );
 }
-
-
 
 function FormHero({ currentStep, totalSteps }) {
   return (
@@ -128,6 +128,7 @@ function FormContainer({ currentStep, formData, handleInputChange, handleFeature
               <Step7Additional formData={formData} handleInputChange={handleInputChange} />
             )}
 
+            {/* BOUTONS DE NAVIGATION DU FORMULAIRE */}
             <div className="form-navigation">
               {currentStep > 1 && (
                 <button type="button" className="btn-back" onClick={handleBack}>

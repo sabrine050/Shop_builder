@@ -3,35 +3,49 @@ import './services.css';
 import Header from '../Header/header';
 import Footer from '../Footer/footer';
 
-export default function ServicesPage() {
+export default function ServicesPage({ setCurrentPage }) {
   const [selectedService, setSelectedService] = useState(null);
 
   return (
     <div className="services-page">
-      <Header />
-      <ServiceHero />
-      <AllServices selectedService={selectedService} setSelectedService={setSelectedService} />
-      <ServiceComparison />
-      <Process />
+      <Header setCurrentPage={setCurrentPage} />
+      <ServiceHero setCurrentPage={setCurrentPage} />
+      <AllServices 
+        selectedService={selectedService} 
+        setSelectedService={setSelectedService}
+        setCurrentPage={setCurrentPage}
+      />
+      <ServiceComparison setCurrentPage={setCurrentPage} />
+      <Process setCurrentPage={setCurrentPage} />
       <Technologies />
-      <CTA />
-      <Footer />
+      <CTA setCurrentPage={setCurrentPage} />
+      <Footer setCurrentPage={setCurrentPage} />
     </div>
   );
 }
 
-function ServiceHero() {
+function ServiceHero({ setCurrentPage }) {
   return (
     <section className="service-hero">
       <div className="container">
         <h1>Professional Development Services</h1>
         <p>From simple websites to complex web applications, we connect you with expert developers who bring your vision to life.</p>
+        
+        {/* Bouton Hero */}
+        <div style={{textAlign: 'center', marginTop: '30px'}}>
+          <button 
+            className="cta-button"
+            onClick={() => setCurrentPage('get-matched')}
+          >
+            Start Your Project
+          </button>
+        </div>
       </div>
     </section>
   );
 }
 
-function AllServices({ selectedService, setSelectedService }) {
+function AllServices({ selectedService, setSelectedService, setCurrentPage }) {
   const services = [
     {
       id: 1,
@@ -217,7 +231,16 @@ function AllServices({ selectedService, setSelectedService }) {
                     </div>
                   </div>
 
-                  <button className="cta-button">Request This Service</button>
+                  {/* BOUTON: Va vers Get Matched */}
+                  <button 
+                    className="cta-button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setCurrentPage('get-matched');
+                    }}
+                  >
+                    Request This Service
+                  </button>
                 </div>
               )}
             </div>
@@ -228,7 +251,7 @@ function AllServices({ selectedService, setSelectedService }) {
   );
 }
 
-function ServiceComparison() {
+function ServiceComparison({ setCurrentPage }) {
   return (
     <section className="service-comparison">
       <div className="container">
@@ -242,6 +265,14 @@ function ServiceComparison() {
               <li>Payment processing</li>
               <li>Inventory management</li>
             </ul>
+            {/* BOUTON */}
+            <button 
+              className="cta-button"
+              onClick={() => setCurrentPage('get-matched')}
+              style={{marginTop: '20px', width: '100%'}}
+            >
+              Get Started
+            </button>
           </div>
           <div className="comparison-card">
             <h3>Need online presence?</h3>
@@ -251,6 +282,14 @@ function ServiceComparison() {
               <li>Contact forms</li>
               <li>Brand showcase</li>
             </ul>
+            {/* BOUTON */}
+            <button 
+              className="cta-button"
+              onClick={() => setCurrentPage('get-matched')}
+              style={{marginTop: '20px', width: '100%'}}
+            >
+              Get Started
+            </button>
           </div>
           <div className="comparison-card">
             <h3>Need custom features?</h3>
@@ -260,6 +299,14 @@ function ServiceComparison() {
               <li>Custom workflows</li>
               <li>Database management</li>
             </ul>
+            {/* BOUTON */}
+            <button 
+              className="cta-button"
+              onClick={() => setCurrentPage('get-matched')}
+              style={{marginTop: '20px', width: '100%'}}
+            >
+              Get Started
+            </button>
           </div>
         </div>
       </div>
@@ -267,7 +314,7 @@ function ServiceComparison() {
   );
 }
 
-function Process() {
+function Process({ setCurrentPage }) {
   return (
     <section className="service-process">
       <div className="container">
@@ -304,6 +351,16 @@ function Process() {
             <p>Deployment and post-launch support</p>
           </div>
         </div>
+        
+        {/* BOUTON: Va vers How It Works */}
+        <div style={{textAlign: 'center', marginTop: '40px'}}>
+          <button 
+            className="cta-button cta-secondary"
+            onClick={() => setCurrentPage('how-it-works')}
+          >
+            Learn More About Our Process
+          </button>
+        </div>
       </div>
     </section>
   );
@@ -339,13 +396,20 @@ function Technologies() {
   );
 }
 
-function CTA() {
+function CTA({ setCurrentPage }) {
   return (
     <section className="services-cta">
       <div className="container">
         <h2>Ready to Start Your Project?</h2>
         <p>Tell us about your needs and we'll match you with the perfect developer</p>
-        <button className="cta-button">Get Started Now</button>
+        
+        {/* BOUTON: Va vers Get Matched */}
+        <button 
+          className="cta-button"
+          onClick={() => setCurrentPage('get-matched')}
+        >
+          Get Started Now
+        </button>
       </div>
     </section>
   );

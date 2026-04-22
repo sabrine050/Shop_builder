@@ -3,39 +3,53 @@ import './howitworks.css';
 import Header from '../Header/header';
 import Footer from '../Footer/footer';
 
-export default function HowItWorksPage() {
+export default function HowItWorksPage({ setCurrentPage }) {
   const [activeStep, setActiveStep] = useState(1);
   const [activeFAQ, setActiveFAQ] = useState(null);
 
   return (
     <div className="how-it-works-page">
-      <Header />
-      <HeroSection />
-      <DetailedProcess activeStep={activeStep} setActiveStep={setActiveStep} />
+      <Header setCurrentPage={setCurrentPage} />
+      <HeroSection setCurrentPage={setCurrentPage} />
+      <DetailedProcess 
+        activeStep={activeStep} 
+        setActiveStep={setActiveStep}
+        setCurrentPage={setCurrentPage}
+      />
       <Timeline />
       <ClientJourney />
-      <DeveloperMatching />
+      <DeveloperMatching setCurrentPage={setCurrentPage} />
       <Communication />
       <QualityAssurance />
       <FAQ activeFAQ={activeFAQ} setActiveFAQ={setActiveFAQ} />
-      <CTASection />
-      <Footer />
+      <CTASection setCurrentPage={setCurrentPage} />
+      <Footer setCurrentPage={setCurrentPage} />
     </div>
   );
 }
 
-function HeroSection() {
+function HeroSection({ setCurrentPage }) {
   return (
     <section className="hiw-hero">
       <div className="container">
         <h1>How ShopBuilder Works</h1>
         <p>From your first idea to your launched website, we guide you through every step of the development process. Here's exactly what to expect.</p>
+        
+        {/* BOUTON HERO */}
+        <div style={{textAlign: 'center', marginTop: '30px'}}>
+          <button 
+            className="cta-button"
+            onClick={() => setCurrentPage('get-matched')}
+          >
+            Start Your Project
+          </button>
+        </div>
       </div>
     </section>
   );
 }
 
-function DetailedProcess({ activeStep, setActiveStep }) {
+function DetailedProcess({ activeStep, setActiveStep, setCurrentPage }) {
   const steps = [
     {
       number: 1,
@@ -197,6 +211,18 @@ function DetailedProcess({ activeStep, setActiveStep }) {
                     <li key={idx}>{detail}</li>
                   ))}
                 </ul>
+                
+                {/* BOUTON si c'est le step 1 */}
+                {step.number === 1 && (
+                  <div style={{marginTop: '30px'}}>
+                    <button 
+                      className="cta-button"
+                      onClick={() => setCurrentPage('get-matched')}
+                    >
+                      Submit Your Project Now
+                    </button>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -282,7 +308,7 @@ function ClientJourney() {
   );
 }
 
-function DeveloperMatching() {
+function DeveloperMatching({ setCurrentPage }) {
   return (
     <section className="developer-matching">
       <div className="container">
@@ -316,6 +342,16 @@ function DeveloperMatching() {
             <div className="criteria-item">✓ Communication style</div>
             <div className="criteria-item">✓ Availability</div>
           </div>
+        </div>
+        
+        {/* BOUTON */}
+        <div style={{textAlign: 'center', marginTop: '40px'}}>
+          <button 
+            className="cta-button"
+            onClick={() => setCurrentPage('developers')}
+          >
+            Meet Our Developers
+          </button>
         </div>
       </div>
     </section>
@@ -446,15 +482,21 @@ function FAQ({ activeFAQ, setActiveFAQ }) {
   );
 }
 
-function CTASection() {
+function CTASection({ setCurrentPage }) {
   return (
     <section className="hiw-cta">
       <div className="container">
         <h2>Ready to Get Started?</h2>
         <p>Submit your project today and get matched with an expert developer</p>
-        <button className="cta-button">Start Your Project</button>
+        
+        {/* BOUTON FINAL */}
+        <button 
+          className="cta-button"
+          onClick={() => setCurrentPage('get-matched')}
+        >
+          Start Your Project
+        </button>
       </div>
     </section>
   );
 }
-

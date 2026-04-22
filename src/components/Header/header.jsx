@@ -1,9 +1,9 @@
 import React from 'react';
 import './header.css';
 
-export default function Header({ setCurrentPage }) {  // ✅ Must receive setCurrentPage
-      console.log('setCurrentPage:', setCurrentPage);  // Should log function
-     console.log('Type:', typeof setCurrentPage);     // Should log "function"
+export default function Header({ setCurrentPage }) {  
+      console.log('setCurrentPage:', setCurrentPage);  
+     console.log('Type:', typeof setCurrentPage);     
     return (
     <header>
       <nav className="container">

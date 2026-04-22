@@ -3,7 +3,6 @@ import './dashboard.css';
 import Header from '../Header/header';
 import Footer from '../Footer/footer';
 
-
 export default function ShopBuilder({setCurrentPage}) {
   return (
     <div className="shopbuilder">
@@ -20,23 +19,42 @@ export default function ShopBuilder({setCurrentPage}) {
   );
 }
 
-function Hero() {
+// ============================================
+// HERO - Boutons principaux
+// ============================================
+function Hero({setCurrentPage}) {
   return (
     <section className="hero">
       <div className="container">
         <h1>Get Matched with Expert Developers for Your Website</h1>
         <p>Describe your vision, we connect you with the perfect developer. From e-commerce stores to custom web applications, bring your ideas to life with professional development services.</p>
        
-      <div className="button-group">       
-        <button className="cta-button">Start Your Project</button>
-        <button className="cta-button cta-secondary">Browse Developers</button>
-      </div> 
+        <div className="button-group">       
+          {/* Bouton 1: Va vers la page Get Matched */}
+          <button 
+            className="cta-button"
+            onClick={() => setCurrentPage('get-matched')}
+          >
+            Start Your Project
+          </button>
+          
+          {/* Bouton 2: Va vers la page Developers */}
+          <button 
+            className="cta-button cta-secondary"
+            onClick={() => setCurrentPage('developers')}
+          >
+            Browse Developers
+          </button>
+        </div> 
       </div>
     </section>
   );
 }
 
-function HowItWorks() {
+// ============================================
+// HOW IT WORKS
+// ============================================
+function HowItWorks({setCurrentPage}) {
   const steps = [
     {
       number: 1,
@@ -73,12 +91,25 @@ function HowItWorks() {
             </div>
           ))}
         </div>
+        
+        {/* Bouton: Va vers How It Works pour plus de détails */}
+        <div style={{textAlign: 'center', marginTop: '40px'}}>
+          <button 
+            className="cta-button"
+            onClick={() => setCurrentPage('how-it-works')}
+          >
+            Learn More About Our Process
+          </button>
+        </div>
       </div>
     </section>
   );
 }
 
-function Services() {
+// ============================================
+// SERVICES
+// ============================================
+function Services({setCurrentPage}) {
   const services = [
     {
       icon: "🛍️",
@@ -136,12 +167,25 @@ function Services() {
             </div>
           ))}
         </div>
+        
+        {/* Bouton: Va vers la page Services complète */}
+        <div style={{textAlign: 'center', marginTop: '40px'}}>
+          <button 
+            className="cta-button"
+            onClick={() => setCurrentPage('services')}
+          >
+            View All Services
+          </button>
+        </div>
       </div>
     </section>
   );
 }
 
-function Developers() {
+// ============================================
+// DEVELOPERS
+// ============================================
+function Developers({setCurrentPage}) {
   const developers = [
     { name: "Alex Martinez", avatar: "👨‍💻", specialty: "Full-Stack Developer", projects: 47, rating: "5★", experience: "8yr" },
     { name: "Sarah Kim", avatar: "👩‍💻", specialty: "E-commerce Specialist", projects: 62, rating: "5★", experience: "10yr" },
@@ -176,12 +220,25 @@ function Developers() {
             </div>
           ))}
         </div>
+        
+        {/* Bouton: Va vers la page Developers complète */}
+        <div style={{textAlign: 'center', marginTop: '40px'}}>
+          <button 
+            className="cta-button"
+            onClick={() => setCurrentPage('developers')}
+          >
+            Meet All Developers
+          </button>
+        </div>
       </div>
     </section>
   );
 }
 
-function Pricing() {
+// ============================================
+// PRICING
+// ============================================
+function Pricing({setCurrentPage}) {
   const plans = [
     {
       name: "Basic Website",
@@ -222,18 +279,34 @@ function Pricing() {
                   <li key={i}>{feature}</li>
                 ))}
               </ul>
-              <button className={`cta-button ${!plan.featured ? 'cta-secondary' : ''}`}>
+              
+              {/* Boutons: Vont vers Get Matched */}
+              <button 
+                className={`cta-button ${!plan.featured ? 'cta-secondary' : ''}`}
+                onClick={() => setCurrentPage('get-matched')}
+              >
                 {plan.price === "Custom" ? "Contact Us" : "Get Started"}
               </button>
             </div>
           ))}
+        </div>
+        
+        {/* Bouton: Va vers la page Pricing complète */}
+        <div style={{textAlign: 'center', marginTop: '40px'}}>
+          <button 
+            className="cta-button cta-secondary"
+            onClick={() => setCurrentPage('pricing')}
+          >
+            View Detailed Pricing
+          </button>
         </div>
       </div>
     </section>
   );
 }
 
-function Testimonials() {
+
+function Testimonials({setCurrentPage}) {
   const testimonials = [
     {
       stars: 5,
@@ -278,15 +351,22 @@ function Testimonials() {
   );
 }
 
-function FinalCTA() {
+
+function FinalCTA({setCurrentPage}) {
   return (
     <section className="final-cta">
       <div className="container">
         <h2>Ready to Build Your Website?</h2>
         <p>Get matched with the perfect developer for your project today</p>
-        <button className="cta-button">Start Your Project Now</button>
+        
+        {/* Bouton: Va vers Get Matched */}
+        <button 
+          className="cta-button"
+          onClick={() => setCurrentPage('get-matched')}
+        >
+          Start Your Project Now
+        </button>
       </div>
     </section>
   );
 }
-
